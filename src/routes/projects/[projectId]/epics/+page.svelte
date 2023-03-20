@@ -1,5 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import { goto } from '$app/navigation';
+	import type { Epic } from '$lib/types';
 
 	import {
 		Table,
@@ -10,8 +12,6 @@
 		TableHeadCell,
 		Button
 	} from 'flowbite-svelte';
-	import { goto } from '$app/navigation';
-	import type { Epic } from '$lib/types/epic';
 
 	export let data: PageData;
 
@@ -40,7 +40,7 @@
 
 		if (response) {
 			try {
-				await fetch(`/api/epics?id=${epic.id}`, {
+				await fetch(`/api/projects/epics?id=${epic.id}`, {
 					method: 'DELETE'
 				});
 				window.location.reload();

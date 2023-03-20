@@ -1,7 +1,7 @@
 <script lang="ts">
+	import type { PageData } from './$types';
 	import { goto } from '$app/navigation';
 	import {
-		Badge,
 		Button,
 		Table,
 		TableBody,
@@ -10,62 +10,65 @@
 		TableHead,
 		TableHeadCell
 	} from 'flowbite-svelte';
-	import type { PageData } from './$types';
 
 	export let data: PageData;
-	$: ({ project, issues, request } = data);
+	$: ({ issues, request, project } = data);
 </script>
 
-<h1>
-	{request.title}
-	<!-- <a href="/projects/{project.id}/edit">Edit</a> -->
-	<p class="text-sm">{request.description}</p>
-</h1>
-<div>
-	<Button
-		on:click={() => {
-			goto(`${request.id}/issues/create`);
-		}}>Add a new Issue</Button
-	>
-</div>
+<main class="container">
+	<h1>
+		{request.title}
+		<a href="/projects/{project.id}/requests/{request.id}/edit">Edit</a>
+		<p class="text-sm">{request.description}</p>
+	</h1>
 
-<Table striped={true}>
-	<TableHead>
-		<TableHeadCell>ISSUES</TableHeadCell>
-	</TableHead>
-	<TableBody tableBodyClass="divide-y">
-		{#each issues as issue}
-			<TableBodyRow>
-				<!-- <TableBodyCell
-					class="cursor-pointer"
-					on:click={() => {
-						goto(`${project.id}/requests/${request.id}`);
-					}}
-				> -->
-				<span>
-					{issue.title}
-				</span>
-				<!-- </TableBodyCell> -->
+	<div>
+		<Button
+			on:click={() => {
+				goto(`${request.id}/issues/create`);
+			}}>Add a new Issue</Button
+		>
+	</div>
 
-				<TableBodyCell>
-					<span>{issue.description}</span>
-				</TableBodyCell>
-
-				<TableBodyCell>
-					<!-- <a href="/projects/{project.id}/requests/{request.id}/edit">Edit</a> -->
-				</TableBodyCell>
-
-				<TableBodyCell>
-					<!-- <button
+	<Table striped={true}>
+		<TableHead>
+			<TableHeadCell>Issues</TableHeadCell>
+		</TableHead>
+		<TableBody tableBodyClass="divide-y">
+			{#each issues as issue}
+				<TableBodyRow>
+					<TableBodyCell
+						class="cursor-pointer"
 						on:click={() => {
-							onDeleteRequest(request);
+							goto(`${request.id}/issues/${issue.id}`);
 						}}
-						class="font-medium text-white hover:underline"
 					>
-						Delete
-					</button> -->
-				</TableBodyCell>
-			</TableBodyRow>
-		{/each}
-	</TableBody>
-</Table>
+						<span>
+							{issue.title}
+						</span>
+					</TableBodyCell>
+
+					<TableBodyCell>
+						<span>{issue.description}</span>
+					</TableBodyCell>
+
+					<TableBodyCell>
+						<span>{issue.timeForEstimation}</span>
+					</TableBodyCell>
+
+					<TableBodyCell>
+						<span>{issue.estimation}</span>
+					</TableBodyCell>
+
+					<TableBodyCell>
+						<button
+							on:click={() => {
+								goto(`${request.id}/issues/${issue.id}/edit`);
+							}}>Edit</button
+						>
+					</TableBodyCell>
+				</TableBodyRow>
+			{/each}
+		</TableBody>
+	</Table>
+</main>

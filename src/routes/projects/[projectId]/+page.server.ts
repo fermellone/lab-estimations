@@ -1,8 +1,6 @@
 import { error, fail, type Actions, type ServerLoad } from '@sveltejs/kit';
 import { prisma } from '$lib/server/prisma';
-import type { Project } from '$lib/types/project';
-import type { Color, Epic } from '$lib/types/epic';
-import type { Request } from '$lib/types/request';
+import type { Project, Color, Epic, Request } from '$lib/types';
 
 export const load: ServerLoad = async ({ params }) => {
 	return {

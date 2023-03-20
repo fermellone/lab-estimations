@@ -34,7 +34,7 @@ const getEpics = async (projectId: number) => {
 		return epics;
 	} catch (err) {
 		console.error(err);
-		throw error(500, { message: 'Could not get epics' });
+		throw error(500, { message: err.message });
 	}
 };
 

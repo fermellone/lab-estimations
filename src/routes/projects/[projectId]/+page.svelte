@@ -40,7 +40,13 @@
 			<Badge class=" px-2 mx-1" color={epic.tag}>{epic.title}</Badge>
 		{/each}
 		<div class="py-2">
-			<a href="/projects/{project.id}/epics" class="w-28">Go to Epics</a>
+			<Button
+				on:click={() => {
+					goto(`/projects/${project.id}/epics`);
+				}}
+				size="xs"
+				class="w-28">Go to Epics</Button
+			>
 		</div>
 	</div>
 

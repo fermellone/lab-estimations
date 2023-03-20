@@ -3,7 +3,8 @@ import { error, fail, type Actions, type ServerLoad } from '@sveltejs/kit';
 
 export const load: ServerLoad = async ({ params }) => {
 	return {
-		epics: await getEpics(Number(params.projectId))
+		// epics: await getEpics(Number(params.projectId))
+		epics: []
 	};
 };
 

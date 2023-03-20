@@ -2,9 +2,15 @@ import type { Epic } from '$lib/types';
 import { error, fail, type Actions, type ServerLoad } from '@sveltejs/kit';
 
 export const load: ServerLoad = async ({ params }) => {
-	return {
-		epics: await getEpics(Number(params.projectId))
-	};
+	try {
+		return {
+			epics: await getEpics(Number(params.projectId))
+		};
+	} catch (error) {
+		return {
+			error
+		};
+	}
 };
 
 const getEpics = async (projectId: number) => {

@@ -1,6 +1,6 @@
 import type { Epic } from '$lib/types';
 // import { error, fail, type Actions, type ServerLoad } from '@sveltejs/kit';
-import type { ServerLoad } from '@sveltejs/kit';
+import { error, type ServerLoad } from '@sveltejs/kit';
 
 import type { Config } from '@sveltejs/adapter-vercel';
 
@@ -10,29 +10,28 @@ export const config: Config = {
 
 export const load: ServerLoad = async ({ params }) => {
 	return {
-		// epics: await getEpics(Number(params.projectId))
-		epics: []
+		epics: await getEpics(Number(params.projectId))
 	};
 };
 
-// const getEpics = async (projectId: number) => {
-// 	const epics: Epic[] = await prisma.epic.findMany({
-// 		where: {
-// 			projectId: projectId,
-// 			deleteStatus: false
-// 		},
-// 		select: {
-// 			id: true,
-// 			title: true,
-// 			tag: true,
-// 			projectId: true
-// 		}
-// 	});
-// 	if (!epics) {
-// 		throw error(404, { message: 'Epics not found' });
-// 	}
-// 	return epics;
-// };
+const getEpics = async (projectId: number) => {
+	const epics: Epic[] = await prisma.epic.findMany({
+		where: {
+			projectId: projectId,
+			deleteStatus: false
+		},
+		select: {
+			id: true,
+			title: true,
+			tag: true,
+			projectId: true
+		}
+	});
+	if (!epics) {
+		throw error(404, { message: 'Epics not found' });
+	}
+	return epics;
+};
 
 // export const actions: Actions = {
 // 	create: async ({ request, params }) => {

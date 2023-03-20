@@ -15,22 +15,26 @@ export const load: ServerLoad = async ({ params }) => {
 };
 
 const getEpics = async (projectId: number) => {
-	const epics: Epic[] = await prisma.epic.findMany({
-		where: {
-			projectId: projectId,
-			deleteStatus: false
-		},
-		select: {
-			id: true,
-			title: true,
-			tag: true,
-			projectId: true
+	try {
+		const epics: Epic[] = await prisma.epic.findMany({
+			where: {
+				projectId: projectId,
+				deleteStatus: false
+			},
+			select: {
+				id: true,
+				title: true,
+				tag: true,
+				projectId: true
+			}
+		});
+		if (!epics) {
+			throw error(404, { message: 'Epics not found' });
 		}
-	});
-	if (!epics) {
-		throw error(404, { message: 'Epics not found' });
+		return epics;
+	} catch (err) {
+		throw error(500, { message: 'Could not get epics' });
 	}
-	return epics;
 };
 
 // export const actions: Actions = {

@@ -9,7 +9,7 @@ export const load: ServerLoad = async ({ params }) => {
 			epics: await getEpics(Number(params.projectId))
 		};
 	} catch (err) {
-		throw error(500, JSON.stringify(err));
+		throw error(500, 'Error while loading epics: ' + JSON.stringify(err));
 	}
 };
 

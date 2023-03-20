@@ -1,5 +1,5 @@
 <script lang="ts">
-	// import type { PageData } from './$types';
+	import type { PageData } from './$types';
 	import { goto } from '$app/navigation';
 	import type { Epic } from '$lib/types';
 
@@ -13,11 +13,9 @@
 		Button
 	} from 'flowbite-svelte';
 
-	// export let data: PageData;
+	export let data: PageData;
 
-	// $: ({ epics } = data);
-
-	export let epics: Epic[];
+	$: ({ epics } = data);
 
 	let epicToEdit: Epic | null = null;
 

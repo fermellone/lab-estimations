@@ -21,7 +21,7 @@
 
 	async function updateEpic() {
 		try {
-			await fetch(`/api/epics?id=${epicToEdit!.id}`, {
+			await fetch(`/api/projects/epics?id=${epicToEdit!.id}`, {
 				method: 'PUT',
 				body: JSON.stringify(epicToEdit)
 			});

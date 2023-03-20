@@ -1,20 +1,10 @@
 import type { Epic } from '$lib/types';
 import { error, fail, type Actions, type ServerLoad } from '@sveltejs/kit';
 
-import type { Config } from '@sveltejs/adapter-vercel';
-
-export const config: Config = {
-	runtime: 'edge'
-};
-
 export const load: ServerLoad = async ({ params }) => {
-	try {
-		return {
-			epics: await getEpics(Number(params.projectId))
-		};
-	} catch (err) {
-		throw error(500, 'Error while loading epics: ' + JSON.stringify(err));
-	}
+	return {
+		epics: await getEpics(Number(params.projectId))
+	};
 };
 
 const getEpics = async (projectId: number) => {

@@ -4,5 +4,5 @@
 
 {#if $page.status === 500}
 	<pre>{$page.error?.message}</pre>
-	<pre>{$page.error}</pre>
+	<pre>{JSON.stringify($page.error)}</pre>
 {/if}

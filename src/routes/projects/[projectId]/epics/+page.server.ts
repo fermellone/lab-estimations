@@ -1,7 +1,11 @@
 import type { Epic } from '$lib/types';
 import { error, fail, type Actions, type ServerLoad } from '@sveltejs/kit';
 
-// export const prerender = true;
+import type { Config } from '@sveltejs/adapter-vercel';
+
+export const config: Config = {
+	runtime: 'edge'
+};
 
 export const load: ServerLoad = async ({ params }) => {
 	try {

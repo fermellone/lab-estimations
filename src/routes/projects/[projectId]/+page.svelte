@@ -20,7 +20,7 @@
 		const response = await confirm('Are you sure you want to delete this project?');
 
 		if (response) {
-			await fetch(`/serverdle/api/projects?id=${project.id}`, {
+			await fetch(`/api/projects?id=${project.id}`, {
 				method: 'DELETE'
 			});
 			goto('/projects');

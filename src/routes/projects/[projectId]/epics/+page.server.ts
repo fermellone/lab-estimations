@@ -1,12 +1,13 @@
 import type { Epic } from '$lib/types';
-import { error, fail, type Actions, type ServerLoad } from '@sveltejs/kit';
+// import { error, fail, type Actions, type ServerLoad } from '@sveltejs/kit';
+import type { ServerLoad } from '@sveltejs/kit';
 
-// export const load: ServerLoad = async ({ params }) => {
-// 	return {
-// 		// epics: await getEpics(Number(params.projectId))
-// 		epics: []
-// 	};
-// };
+export const load: ServerLoad = async ({ params }) => {
+	return {
+		// epics: await getEpics(Number(params.projectId))
+		epics: []
+	};
+};
 
 // const getEpics = async (projectId: number) => {
 // 	const epics: Epic[] = await prisma.epic.findMany({

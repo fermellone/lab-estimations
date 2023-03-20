@@ -1,5 +1,6 @@
 import type { Project } from '@prisma/client';
 import { error, fail, type Actions, type ServerLoad } from '@sveltejs/kit';
+import { prisma } from '$lib/server/prisma';
 
 export const load: ServerLoad = async ({ params }) => {
 	return {
@@ -23,5 +24,3 @@ const getProject = async (projectId: number) => {
 	}
 	return project;
 };
-
-

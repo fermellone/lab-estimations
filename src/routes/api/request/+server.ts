@@ -1,4 +1,5 @@
 import { fail, type RequestHandler } from '@sveltejs/kit';
+import { prisma } from '$lib/server/prisma';
 
 export const DELETE = (async ({ url }) => {
 	const id = url.searchParams.get('id');

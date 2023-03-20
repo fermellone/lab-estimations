@@ -1,12 +1,7 @@
 import type { Epic } from '$lib/types';
-// import { error, fail, type Actions, type ServerLoad } from '@sveltejs/kit';
-import { error, type ServerLoad } from '@sveltejs/kit';
+import { error, fail, type Actions, type ServerLoad } from '@sveltejs/kit';
 
-import type { Config } from '@sveltejs/adapter-vercel';
-
-export const config: Config = {
-	runtime: 'nodejs18.x'
-};
+import { prisma } from '$lib/server/prisma';
 
 export const load: ServerLoad = async ({ params }) => {
 	return {
@@ -38,28 +33,28 @@ const getEpics = async (projectId: number) => {
 	}
 };
 
-// export const actions: Actions = {
-// 	create: async ({ request, params }) => {
-// 		const { title, color } = Object.fromEntries(await request.formData()) as {
-// 			title: string;
-// 			color: string;
-// 		};
+export const actions: Actions = {
+	create: async ({ request, params }) => {
+		const { title, color } = Object.fromEntries(await request.formData()) as {
+			title: string;
+			color: string;
+		};
 
-// 		try {
-// 			await prisma.epic.create({
-// 				data: {
-// 					title,
-// 					tag: color,
-// 					projectId: Number(params.projectId)
-// 				}
-// 			});
-// 		} catch (err) {
-// 			console.error(err);
-// 			return fail(500, { message: 'Could not create the epic.' });
-// 		}
+		try {
+			await prisma.epic.create({
+				data: {
+					title,
+					tag: color,
+					projectId: Number(params.projectId)
+				}
+			});
+		} catch (err) {
+			console.error(err);
+			return fail(500, { message: 'Could not create the epic.' });
+		}
 
-// 		return {
-// 			status: 201
-// 		};
-// 	}
-// };
+		return {
+			status: 201
+		};
+	}
+};

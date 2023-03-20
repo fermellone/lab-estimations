@@ -1,5 +1,6 @@
 import type { Epic } from '$lib/types';
 import type { ServerLoad } from '@sveltejs/kit';
+import { prisma } from '$lib/server/prisma';
 
 export const load: ServerLoad = async ({ params }) => {
 	return {

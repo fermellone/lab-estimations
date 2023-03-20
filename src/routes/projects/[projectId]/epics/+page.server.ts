@@ -6,10 +6,8 @@ export const load: ServerLoad = async ({ params }) => {
 		return {
 			epics: await getEpics(Number(params.projectId))
 		};
-	} catch (error) {
-		return {
-			error
-		};
+	} catch (err) {
+		throw error(500, JSON.stringify(err));
 	}
 };
 

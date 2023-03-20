@@ -1,6 +1,8 @@
 import type { Epic } from '$lib/types';
 import { error, fail, type Actions, type ServerLoad } from '@sveltejs/kit';
 
+export const prerender = true;
+
 export const load: ServerLoad = async ({ params }) => {
 	try {
 		return {

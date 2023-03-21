@@ -3,4 +3,4 @@
 </script>
 
 <h1>Something went wrong: {$page.status}</h1>
-<p>{$page.error?.message}</p>
+<p>Cosito: {$page.error?.message}</p>

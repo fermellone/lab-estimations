@@ -32,37 +32,45 @@ async function getProject(projectId: number) {
 }
 
 async function getRequest(requestId: number) {
-	const request: Request = await prisma.request.findUnique({
-		where: {
-			id: requestId
-		},
-		select: {
-			id: true,
-			title: true,
-			description: true
+	try {
+		const request: Request = await prisma.request.findUnique({
+			where: {
+				id: requestId
+			},
+			select: {
+				id: true,
+				title: true,
+				description: true
+			}
+		});
+		if (!request) {
+			throw error(404, { message: 'Request not found' });
 		}
-	});
-	if (!request) {
-		throw error(404, { message: 'Request not found' });
+		return request;
+	} catch (error) {
+		throw error(404, { message: error.message });
 	}
-	return request;
 }
 
 async function getIssues(requestId: number) {
-	const issues: Issue[] = await prisma.issue.findMany({
-		where: {
-			id: true,
-			requestId: requestId,
-			title: true,
-			description: true,
-			timeForEstimation: true,
-			estimation: true
+	try {
+		const issues: Issue[] = await prisma.issue.findMany({
+			where: {
+				id: true,
+				requestId: requestId,
+				title: true,
+				description: true,
+				timeForEstimation: true,
+				estimation: true
+			}
+		});
+		if (!issues) {
+			throw error(404, { message: 'Requests not found' });
 		}
-	});
-	if (!issues) {
-		throw error(404, { message: 'Requests not found' });
+		return issues;
+	} catch (error) {
+		throw error(404, { message: error.message });
 	}
-	return issues;
 }
 
 export const actions: Actions = {

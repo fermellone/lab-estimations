@@ -27,7 +27,7 @@ async function getProject(projectId: number) {
 		}
 		return project;
 	} catch (err) {
-		throw error(500, { message: err.message });
+		throw error(500, { message: 'Aparte fallo el tema de  project ${err.message}');
 	}
 }
 

@@ -27,7 +27,7 @@ async function getProject(projectId: number) {
 		}
 		return project;
 	} catch (error) {
-		console.log(error);
+		throw error;
 	}
 }
 

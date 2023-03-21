@@ -26,8 +26,8 @@ async function getProject(projectId: number) {
 			throw error(404, { message: 'Project not found' });
 		}
 		return project;
-	} catch (error) {
-		throw error(404, { message: error.message });
+	} catch (err) {
+		throw error(500, { message: err.message });
 	}
 }
 
@@ -47,8 +47,8 @@ async function getRequest(requestId: number) {
 			throw error(404, { message: 'Request not found' });
 		}
 		return request;
-	} catch (error) {
-		throw error(404, { message: error.message });
+	} catch (err) {
+		throw error(500, { message: err.message });
 	}
 }
 
@@ -68,8 +68,8 @@ async function getIssues(requestId: number) {
 			throw error(404, { message: 'Requests not found' });
 		}
 		return issues;
-	} catch (error) {
-		throw error(404, { message: error.message });
+	} catch (err) {
+		throw error(500, { message: err.message });
 	}
 }
 

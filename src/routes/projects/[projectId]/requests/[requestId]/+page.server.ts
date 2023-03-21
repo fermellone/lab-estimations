@@ -27,7 +27,7 @@ async function getProject(projectId: number) {
 		}
 		return project;
 	} catch (error) {
-		throw error(500, 'Error while loading epics: ' + JSON.stringify(error));
+		throw error(500, { message: 'Error getting epics' });
 	}
 }
 

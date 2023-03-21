@@ -2,7 +2,5 @@
 	import { page } from '$app/stores';
 </script>
 
-{#if $page.status === 500}
-	<pre>{$page.error?.message}</pre>
-	<pre>{$page.error}</pre>
-{/if}
+<h1>Something went wrong: {$page.status}</h1>
+<p>{$page.error?.message}</p>

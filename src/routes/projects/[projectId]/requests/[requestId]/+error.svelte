@@ -1,11 +1,8 @@
-<script>
+<script lang="ts">
 	import { page } from '$app/stores';
-	export let $$props;
 </script>
 
-{#await page}
-	<div>loading...</div>
-{:then page}
-			<h1>Error {$$props.error.statusCode}</h1>
-	{/if}
-{/await}
+{#if $page.status === 500}
+	<pre>{$page.error?.message}</pre>
+	<pre>{$page.error}</pre>
+{/if}

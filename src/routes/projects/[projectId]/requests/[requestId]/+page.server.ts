@@ -55,9 +55,11 @@ async function getRequest(requestId: number) {
 async function getIssues(requestId: number) {
 	try {
 		const issues: Issue[] = await prisma.issue.findMany({
+			where: {
+				requestId: requestId
+			},
 			select: {
 				id: true,
-				requestId: requestId,
 				title: true,
 				description: true,
 				timeForEstimation: true,

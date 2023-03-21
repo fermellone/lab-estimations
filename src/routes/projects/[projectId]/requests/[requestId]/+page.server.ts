@@ -11,20 +11,24 @@ export const load: ServerLoad = async ({ params }) => {
 };
 
 async function getProject(projectId: number) {
-	const project: Project = await prisma.project.findUnique({
-		where: {
-			id: projectId
-		},
-		select: {
-			id: true,
-			title: true,
-			description: true
+	try {
+		const project: Project = await prisma.project.findUnique({
+			where: {
+				id: projectId
+			},
+			select: {
+				id: true,
+				title: true,
+				description: true
+			}
+		});
+		if (!project) {
+			throw error(404, { message: 'Project not found' });
 		}
-	});
-	if (!project) {
-		throw error(404, { message: 'Project not found' });
+		return project;
+	} catch (error) {
+		console.log(error);
 	}
-	return project;
 }
 
 async function getRequest(requestId: number) {

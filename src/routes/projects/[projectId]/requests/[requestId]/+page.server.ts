@@ -28,7 +28,7 @@ async function getProject(projectId: number) {
 		return project;
 	} catch (error) {
 		console.log(error);
-		throw error(500, { message: 'Este es ${error.message}' });
+		throw error(500, { message: 'Hola soy un error' });
 	}
 }
 

@@ -27,7 +27,7 @@ async function getProject(projectId: number) {
 		}
 		return project;
 	} catch (err) {
-		throw error(500, { message: 'Aparte fallo el tema de  project ${err.message}' });
+		throw error(500, { message: err.message });
 	}
 }
 
@@ -55,7 +55,7 @@ async function getRequest(requestId: number) {
 async function getIssues(requestId: number) {
 	try {
 		const issues: Issue[] = await prisma.issue.findMany({
-			where: {
+			select: {
 				id: true,
 				requestId: requestId,
 				title: true,

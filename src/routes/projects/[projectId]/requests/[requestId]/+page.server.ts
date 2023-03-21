@@ -56,7 +56,8 @@ async function getIssues(requestId: number) {
 	try {
 		const issues: Issue[] = await prisma.issue.findMany({
 			where: {
-				requestId: requestId
+				requestId: requestId,
+				deleteStatus: false
 			},
 			select: {
 				id: true,

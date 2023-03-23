@@ -7,10 +7,10 @@ export const load: ServerLoad = async ({ params }) => {
 
 	const RequestWithCreditAmounts: RequestWithCreditsAmount[] = requests.map((request) => {
 		const issues = request.issues;
-		const creditsAmount = issues.reduce((acc, issue) => {
+		let creditsAmount = issues.reduce((acc, issue) => {
 			return acc + issue.estimation + issue.timeForEstimation;
 		}, 0);
-
+		creditsAmount = Math.round(creditsAmount * 100) / 100;
 		return { ...request, creditsAmount };
 	});
 

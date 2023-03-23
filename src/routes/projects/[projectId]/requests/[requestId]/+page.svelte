@@ -48,9 +48,9 @@
 						</span>
 					</TableBodyCell>
 
-					<TableBodyCell>
+					<!-- <TableBodyCell>
 						<span>{issue.description}</span>
-					</TableBodyCell>
+					</TableBodyCell> -->
 
 					<TableBodyCell>
 						<span>{issue.timeForEstimation}</span>

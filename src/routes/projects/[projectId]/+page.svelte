@@ -16,19 +16,17 @@
 	export let data: PageData;
 	$: ({ project, epics, requests } = data);
 
-	// por cada request, obtener los issues y luego la supa de todas las estimaciones de los issues y de todos los timeForEstimations de los issues
+	// por cada request, obtener los issues y luego la suma de todas las estimaciones de los issues y de todos los timeForEstimations de los issues en el onMount
+	// luego, en el html, mostrar la suma de las estimaciones y la suma de los timeForEstimations
+	let totalEstimation = 0;
+	let totalTimeForEstimation = 0;
 
-	// obtener la sumatoria de todas las estimaciones + sumatoria de todos los timeForEstimations de los issues
-	$: totalEstimation = requests.reduce((acc, request) => {
-		const issues = request.issues;
-		const estimation = issues.reduce((acc, issue) => acc + issue.estimation, 0);
-		return acc + estimation;
-	}, 0);
-	$: totalTimeForEstimation = requests.reduce((acc, request) => {
-		const issues = request.issues;
-		const timeForEstimation = issues.reduce((acc, issue) => acc + issue.timeForEstimation, 0);
-		return acc + timeForEstimation;
-	}, 0);
+	$: requests.forEach((request: Request) => {
+		request.issues.forEach((issue) => {
+			totalEstimation += issue.estimation;
+			totalTimeForEstimation += issue.timeForEstimation;
+		});
+	});
 
 	console.log(totalEstimation);
 	console.log(totalTimeForEstimation);

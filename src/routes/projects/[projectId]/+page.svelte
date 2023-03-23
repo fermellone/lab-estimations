@@ -16,6 +16,23 @@
 	export let data: PageData;
 	$: ({ project, epics, requests } = data);
 
+	// por cada request, obtener los issues y luego la supa de todas las estimaciones de los issues y de todos los timeForEstimations de los issues
+
+	// obtener la sumatoria de todas las estimaciones + sumatoria de todos los timeForEstimations de los issues
+	$: totalEstimation = requests.reduce((acc, request) => {
+		const issues = request.issues;
+		const estimation = issues.reduce((acc, issue) => acc + issue.estimation, 0);
+		return acc + estimation;
+	}, 0);
+	$: totalTimeForEstimation = requests.reduce((acc, request) => {
+		const issues = request.issues;
+		const timeForEstimation = issues.reduce((acc, issue) => acc + issue.timeForEstimation, 0);
+		return acc + timeForEstimation;
+	}, 0);
+
+	console.log(totalEstimation);
+	console.log(totalTimeForEstimation);
+
 	const onDelete = async (request: Request) => {
 		const response = await confirm('Are you sure you want to delete this project?');
 

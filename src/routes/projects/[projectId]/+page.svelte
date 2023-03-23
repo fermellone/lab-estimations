@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import { goto } from '$app/navigation';
-	import type { Request } from '$lib/types';
+	import type { RequestWithCreditsAmount } from '$lib/types';
 	import {
 		Badge,
 		Button,
@@ -17,7 +17,7 @@
 	export let data: PageData;
 	$: ({ project, epics, requests } = data);
 
-	const onDelete = async (request: Request) => {
+	const onDelete = async (request: RequestWithCreditsAmount) => {
 		const response = await confirm('Are you sure you want to delete this project?');
 
 		if (response) {
@@ -67,7 +67,9 @@
 	<Table striped={true}>
 		<TableHead>
 			<TableHeadCell>Requests</TableHeadCell>
-			<TableHeadCell>Requests</TableHeadCell>
+			<TableHeadCell>Epic</TableHeadCell>
+			<TableHeadCell>Description</TableHeadCell>
+			<TableHeadCell>Total Credit Amount</TableHeadCell>
 		</TableHead>
 		<TableBody tableBodyClass="divide-y">
 			{#each requests as request}
@@ -93,6 +95,10 @@
 
 					<TableBodyCell>
 						<span>{request.description}</span>
+					</TableBodyCell>
+
+					<TableBodyCell>
+						<span>{request.creditsAmount}</span>
 					</TableBodyCell>
 
 					<TableBodyCell>

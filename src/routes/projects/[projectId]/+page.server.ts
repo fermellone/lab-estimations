@@ -5,13 +5,13 @@ import type { Project, Color, Epic, Request, RequestWithCreditsAmount } from '$l
 export const load: ServerLoad = async ({ params }) => {
 	const requests = await getRequests(Number(params.projectId));
 
-	const RequestWithCreditAmounts = requests.map((request) => {
+	const RequestWithCreditAmounts: RequestWithCreditsAmount[] = requests.map((request) => {
 		const issues = request.issues;
 		const creditsAmount = issues.reduce((acc, issue) => {
 			return acc + issue.estimation + issue.timeForEstimation;
 		}, 0);
 
-		return { ...request, creditsAmount } as RequestWithCreditsAmount;
+		return { ...request, creditsAmount };
 	});
 
 	return {

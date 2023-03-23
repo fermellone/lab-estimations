@@ -1,13 +1,41 @@
 import { error, fail, type Actions, type ServerLoad } from '@sveltejs/kit';
 import { prisma } from '$lib/server/prisma';
-import type { Project, Color, Epic, Request } from '$lib/types';
+import type { Project, Color, Epic, Request, Issue } from '$lib/types';
 
 export const load: ServerLoad = async ({ params }) => {
+	const requests = await getRequests(Number(params.projectId));
+	// por cada request, buscar los issues y agregarlos a la request
+	for (let i = 0; i < requests.length; i++) {
+		const issues = await getIssues(requests[i].id);
+		requests[i].issues = issues;
+	}
+
 	return {
 		project: await getProject(Number(params.projectId)),
 		epics: await getEpics(Number(params.projectId)),
-		requests: await getRequests(Number(params.projectId))
+		requests: requests
 	};
+};
+
+const getIssues = async (requestId: number) => {
+	const issues: Issue[] = await prisma.issue.findMany({
+		where: {
+			requestId: requestId,
+			deleteStatus: false
+		},
+		select: {
+			id: true,
+			title: true,
+			timeForEstimation: true,
+			estimation: true
+		}
+	});
+
+	if (!issues) {
+		return [];
+	} else {
+		return issues;
+	}
 };
 
 const getProject = async (projectId: number) => {

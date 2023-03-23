@@ -16,20 +16,7 @@
 	export let data: PageData;
 	$: ({ project, epics, requests } = data);
 
-	// por cada request, obtener los issues y luego la suma de todas las estimaciones de los issues y de todos los timeForEstimations de los issues en el onMount
-	// luego, en el html, mostrar la suma de las estimaciones y la suma de los timeForEstimations
-	let totalEstimation = 0;
-	let totalTimeForEstimation = 0;
-
-	$: requests.forEach((request: Request) => {
-		request.issues.forEach((issue) => {
-			totalEstimation += issue.estimation;
-			totalTimeForEstimation += issue.timeForEstimation;
-		});
-	});
-
-	console.log(totalEstimation);
-	console.log(totalTimeForEstimation);
+	console.log(JSON.stringify(requests));
 
 	const onDelete = async (request: Request) => {
 		const response = await confirm('Are you sure you want to delete this project?');

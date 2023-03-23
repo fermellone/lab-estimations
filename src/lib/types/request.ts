@@ -8,3 +8,6 @@ export interface Request {
 	projectId: number;
 	epicId: number;
 }
+export interface RequestWithCreditsAmount extends Request {
+	creditsAmount: number;
+}

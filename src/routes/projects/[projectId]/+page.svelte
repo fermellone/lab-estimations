@@ -30,6 +30,7 @@
 
 	onMount(async () => {
 		console.log(JSON.stringify(requests));
+		// obtener la sumatoria de todos los estimation de los issues de los requests
 	});
 </script>
 
@@ -65,6 +66,7 @@
 
 	<Table striped={true}>
 		<TableHead>
+			<TableHeadCell>Requests</TableHeadCell>
 			<TableHeadCell>Requests</TableHeadCell>
 		</TableHead>
 		<TableBody tableBodyClass="divide-y">

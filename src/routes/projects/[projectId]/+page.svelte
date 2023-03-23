@@ -12,11 +12,10 @@
 		TableHead,
 		TableHeadCell
 	} from 'flowbite-svelte';
+	import { onMount } from 'svelte';
 
 	export let data: PageData;
 	$: ({ project, epics, requests } = data);
-
-	console.log(JSON.stringify(requests));
 
 	const onDelete = async (request: Request) => {
 		const response = await confirm('Are you sure you want to delete this project?');
@@ -28,6 +27,10 @@
 			goto('/projects');
 		}
 	};
+
+	onMount(async () => {
+		console.log(JSON.stringify(requests));
+	});
 </script>
 
 <main class="container">

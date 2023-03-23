@@ -12,7 +12,6 @@
 		TableHead,
 		TableHeadCell
 	} from 'flowbite-svelte';
-	import { onMount } from 'svelte';
 
 	export let data: PageData;
 	$: ({ project, epics, requests } = data);
@@ -27,11 +26,6 @@
 			goto('/projects');
 		}
 	};
-
-	onMount(async () => {
-		console.log(JSON.stringify(requests));
-		// obtener la sumatoria de todos los estimation de los issues de los requests
-	});
 </script>
 
 <main class="container">

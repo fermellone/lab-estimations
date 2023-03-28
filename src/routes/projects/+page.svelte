@@ -9,23 +9,26 @@
 </script>
 
 <main class="container">
-		<div>
-			<h2>Projects</h2>
-			<Button
-				on:click={() => {
-					goto('projects/create');
-				}}>Add a new project</Button
-			>
-			{#each projects as project}
-				<article>
-					<a href="/projects/{project.id}">
-						{project.title}
-					</a>
+	<div>
+		<h2>Projects</h2>
+		<Button
+			on:click={() => {
+				goto('projects/create');
+			}}>Add a new project</Button
+		>
+		{#each projects as project}
+			<article>
+				<a href="/projects/{project.id}">
+					{project.title}
+				</a>
 
-					<p>
-						{project.description}
-					</p>
-				</article>
-			{/each}
-		</div>
+				<p>
+					{#each project.description.split('\n') as line}
+						{line}
+						<br />
+					{/each}
+				</p>
+			</article>
+		{/each}
+	</div>
 </main>
